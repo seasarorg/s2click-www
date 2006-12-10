@@ -29,16 +29,64 @@
   </dd>
 </dl> 
 <dl>
-  <dd><a href="http://click.sourceforge.net/docs/click-cheat-sheet.pdf">Cheat Sheet</a>　　ライフサイクルが直ぐ分かるチャートです</dd>
+  <dd>同じ　BINフォルダーにある、「runjetty.bat」をダブルクリックして、JETTYを起動する。</dd>
 </dl>
 <dl>
-  <dd><a href="http://orangoo.com/labs/GreyBox/">GreyBox</a>　　GreyBoxのサイトです</dd>
+  <dd>ブラウザで、「http://localhost:8080/」にアクセスすれば下記の様に表示されます</dd>
 </dl>
 <dl>
-  <dd><a href="http://amateras.sourceforge.jp/cgi-bin/fswiki/wiki.cgi/click">竹添さんのAmateras Click Framework Wiki</a>　日本語で情報が得られます。</dd>
-</dl> 
-<dl><dd><a href="http://www.ogis-ri.co.jp/otc/hiroba/technical/ClickFramework/clickfw01.html">Click Framework探訪</a>　オブジェクトの広場の記事です</dd></dl> 
-<dl><dd><a href="http://www3.vis.ne.jp/~asaki/p_diary/diary.cgi">竹添さんのBlog</a>　EclipseのPluginも作っている竹添さんの日記です</dd></dl> 
+  <dd><img src="images/home.jpeg" /></dd>
+</dl>
+<h3><a name="eclipse" id="eclipse">ECLIPSEのセットアップ</a></h3>
+<dl>
+
+<dd>ECLIPSE 3.2（または3.1）の MENUから「File」「Import」の下記の様に指定してImportしてください（英語Menuの例です）</dd>
+</dl>
+<dl>
+  <dd><img src="images/e_import.jpeg" /></dd>
+</dl>
+<dl>
+  <dd><img src="images/e_import2.jpeg" /></dd>
+</dl>
+<dl>
+
+<dd>DEBUGの起動の方法</dd>
+</dl>
+<dl>
+
+<dd>下記の設定でJETTYを起動するのをお薦めします。TOMCATに比べて約半分の時間で起動でき快適です</dd>
+</dl>
+<dl>
+
+<dd>MENUの「Run」から「Debug...」をえらび、Java Applicationの「New Configuration」をえらび下記の様に入力する。</dd>
+</dl>
+<dl>
+
+<dd>Main Classに「org.mortbay.start.Main」</dd>
+</dl>
+<img src="images/debug1.jpeg" />
+<dl>
+
+<dd>Program Argumentに「./WebContent/WEB-INF/jetty.xml」</dd>
+</dl>
+<img src="images/debug2.jpeg" />
+<dl>
+<dd>WEB-INF\libにある、下記４つのJarを選択する</dd>
+  <dd><img src="images/jarsel.jpeg" /></dd>
+</dl>
+
+<img src="images/debug3.jpeg" />
+<dl>
+
+<dd>これでDebugボタンを押せば、実行できます。なお Portを８０８０から変更する場合は、WEB-INF フォルダーの「jetty.xml」内の設定を変更します。</dd>
+</dl>
+<dl>
+
+<dd>TOMCATを使用する場合は、「Sysdeo Eclipse Tomcat Launcher plugin」がお薦めです。<a href="http://maihime.sandbox.seasar.org/ja/">舞姫</a>のサイトを参考にしてください</dd>
+</dl>
+<ul>
+<li><a href="sample.html">Sampleを見てみよう</a></li>
+  </ul>
 <!-- document end -->
 <!-- don't edit start --></td><td width="14"><img src="images/spacer.gif" alt="" height="14" width="14" /></td></tr><tr><td width="14"><img src="images/spacer.gif" alt="" height="30" width="14" /></td><td width="766"><img src="images/spacer.gif" alt="" height="30" width="592" /></td></tr><tr><td width="14"><img src="images/spacer.gif" alt="" height="14" width="14" /></td><td class="copyright" width="766">Copyright&copy;
 2004-2005, The Seasar Foundation and the others. All rights reserved.</td>
