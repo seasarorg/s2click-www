@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"><head><!-- don't edit start --><title>S2Click-Validate</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"><head><!-- don't edit start --><title>S2Click-DateField</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><link href="s2click.css" type="text/css" rel="stylesheet" media="screen" /><link href="seasar_b.css" type="text/css" rel="stylesheet" media="screen" /><link href="seasar_p.css" type="text/css" rel="stylesheet" media="print" /><script src="seasar_b.js" type="text/JavaScript" language="JavaScript">
 </script></head>
 <body style="direction: ltr;" onload="preload('ja')"><table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="780"><table class="white" border="0" cellpadding="0" cellspacing="0" width="780">
@@ -8,66 +8,89 @@
 <dl>
 <dd>&nbsp;</dd>
 
-<h3><a name="document" id="document">Validate
+<h3><a name="document" id="document">DateField
 </a></h3>
 </dl>
 <dl>
 
-<dd>Click Frameworkの特徴の一つは、ValidationがUIと一体化されている点だとおもいます。</dd>
+<dd>DateFieldも用意されていますが、日本では標準のままでは下記の様に上手く表示できませんでした</dd>
 </dl>
 <dl>
-
-<dd>各データタイプ毎に例えば 、 このSampleで使用した、IntegerFieldや、DoubleField、LongFIeld、NumberField、DateField、EmailField、RegixFieldなどExtrasには各種含まれており、また自分で拡張するのも容易です。またDataType毎になっているので、設定する際や読み取る際もString型に変換する必要がありません。</dd>
+<img src="images/datefield1.jpeg" />
+<dd>そこで、S2Clickのコントロールとして、YYYY/MM/DD表示とYY/MM/DD表示のコントロールをつくりました。下記の様に設定します。なお最後にtrueと入れてあるのは、必須項目の設定です</dd>
 </dl>
-<dl>
-
-<dd>JavaScriptとも連携しており、たとえばIntegerFieldに数字以外を入力しても、無視されると共に、最大値や最小値のCheckが自動的に行われ、それに違反した場合はエラー表示がフォームのなかに自動的に表示されますので、わざわざコードを書く必要がなく、大変簡単に処理できます。</dd>
-</dl>
-<dl>
-
-<dd>それでは、画面とそれを設定するJAVA コードを見てみましょう</dd>
-</dl>
-
-<img src="images/validate1.jpeg" />
 <!--code start-->
 <div class="excode"><pre>
 <code>
-package org.seasar.s2click.example.page.validate;
-
-import net.sf.click.control.Form;
-import net.sf.click.control.Submit;
-import net.sf.click.extras.control.EmailField;
-import net.sf.click.extras.control.IntegerField;
-
-public class ValidatePage extends org.seasar.s2click.example.page.BorderPage {
-	
-	private Form form = new Form("form");
-	public ValidatePage(){
-		addControl(form);
-		IntegerField intfield = new IntegerField("int","Integer Test 最大10");
-		intfield.setMaxValue(10);
-		form.add(intfield);
-		form.add(new EmailField("email","EMAIL ADDRESS"));
-		form.add(new Submit("submit"));
-	}
-}
+	public DateFieldYYYYMMDD df1 = 
+		new DateFieldYYYYMMDD("df1","YYYY/MM/DD",true);
+	public DateFieldYYMMDD df2 = 
+		new DateFieldYYMMDD("df2","YY/MM/DD",true);
 </code>
 </pre></div>
 <!--code end-->
 <dl>
 
-<dd>上記の様にIntegerFieldに最大値 １０の設定が容易にできます。ここに１０以上の値を入れると、下記の様にエラー表示されます</dd>
-</dl>
-<img src="images/validate2.jpeg" />
-<dl>
-
-<dd>エラーのフィールドの背景色が黄色に変わり、エラーメッセージが表示されます</dd>
+<dd>必須項目の場合は、項目名の後ろに赤のマークが表示されます。</dd>
 </dl>
 <dl>
 
+<dd>またこのSampleでは、結果を画面の下と、setForward機能を使用して、他の画面に表示する場合の例となっています。下記にすべてのJAVAコードを参考に載せます</dd>
+</dl>
+
+<!--code start-->
+<div class="excode"><pre>
+<code>
+public class DatePage extends BorderPage{
+	public Logger log = Logger.getLogger(this.getClass());
+	public Form form = new Form();
+	public String date1 = "";
+	public String date2 = "";
+	public DateFieldYYYYMMDD df1 = 
+		new DateFieldYYYYMMDD("df1","YYYY/MM/DD",true);
+	public DateFieldYYMMDD df2 = 
+		new DateFieldYYMMDD("df2","YY/MM/DD",true);
+	public  DatePage(){
+		form.add(new DateField("stddate","標準 DateField"));
+		form.add(df1);
+		form.add(df2);
+		form.add(new Submit("ok","下に表示",this,"onOkClicked"));
+		form.add(new Submit("go","新画面に表示",this,"onGoClicked"));
+		
+	}
+	private boolean processSubmit(){
+		if (form.isValid()){
+			DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+			if (df1.getValue().length() > 0){
+				date1=df.format(df1.getDate());
+				log.debug(df1.getDate().toString());
+			}
+			if (df2.getValue().length() > 0){
+				date2=df.format(df2.getDate());
+				log.debug(df2.getDate().toString());
+			}
+			return true;
+		}
+		return false;		
+	}
+	public boolean onOkClicked(){
+		return processSubmit();
+	}
+	public boolean onGoClicked(){
+		if (processSubmit()){
+			getContext().setRequestAttribute("date1xx", date1);
+			getContext().setRequestAttribute("date2xx", date2);
+			setForward("/datefield/dateDisplay.htm");
+		}
+		return false;
+	}
+}
+</code>
+</pre></div>
+<!--code end-->
 
 <ul>
-<li><a href="datefield.html">datefield サンプル</a></li>
+<li>add サンプル</li>
   </ul>
 <!-- document end -->
 <!-- don't edit start --></td><td width="14"><img src="images/spacer.gif" alt="" height="14" width="14" /></td></tr><tr><td width="14"><img src="images/spacer.gif" alt="" height="30" width="14" /></td><td width="766"><img src="images/spacer.gif" alt="" height="30" width="592" /></td></tr><tr><td width="14"><img src="images/spacer.gif" alt="" height="14" width="14" /></td><td class="copyright" width="766">Copyright&copy;
