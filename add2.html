@@ -26,14 +26,12 @@
 public class Add2Page extends BorderPage {
     public Form form = new Form();
     public Text res = new Text("result","= 0");
-    public IntegerField para1 = new IntegerField("para1","",true);
-    public IntegerField para2 = new IntegerField("para2","",true);
     private AddLogic addlogic;
     public Add2Page() {
       	form.setColumns(4);	
-    	form.add(para1);
+    	form.add(new IntegerField("para1","",true));
     	form.add(new Text("plus","+"));
-    	form.add(para2);
+    	form.add(new IntegerField("para2","",true));
     	res.setAttribute("style", "color:#000000");
     	form.add(res);
         form.add(new Submit("ok", "calculate", this, "onOkClicked"));
@@ -41,7 +39,8 @@ public class Add2Page extends BorderPage {
     public boolean onOkClicked() {
         if (form.isValid()) {
         	res.setString("= "
-        			+String.valueOf(addlogic.calculate(para1.getInteger(),para2.getInteger())));
+         			+String.valueOf(addlogic.calculate(((IntegerField)form.getField("para1"))
+						.getInteger(),((IntegerField)form.getField("para2")).getInteger())));
         	return false;
         }
         return true;
