@@ -1,0 +1,7 @@
+net.sf.click
+org.apache.velocity.tools.generic.introspection
+org.seasar.s2click
+org.seasar.s2click.annotation
+org.seasar.s2click.control
+org.seasar.s2click.page
+org.seasar.s2click.util
