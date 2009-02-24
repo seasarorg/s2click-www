@@ -42,6 +42,18 @@
 
 <h1>更新履歴</h1>
 
+<h2>Version 0.5.0 - 2009/02/25</h2>
+<ul>
+  <li><code>@Path</code>アノテーションを使ったページクラスがあるとproductionモード、profileモードで動作しないバグを修正しました。</li>
+  <li><code>ClickApp</code>をpublicクラスに変更し、<code>S2ClickUtils#getClickApp()</code>で<code>ClickApp</code>を取得できるようにしました。</li>
+  <li><code>@Request</code>によるリクエストパラメータのバインド処理を<code>S2ClickServlet</code>ではなく<code>S2ClickPage#onInit()</code>で行うようにしました。</li>
+  <li>クラスパス内のリソースを参照するための<code>ResourceServlet</code>を追加しました。</li>
+  <li><code>MobileForm</code>コントロールを追加しました。</li>
+  <li><code>PaginateList</code>コントロールを追加しました。</li>
+  <li>同梱のS2Containerを2.4.34にバージョンアップしました。</li>
+  <li><code>S2ClickEncodingFilter</code>を追加しました。</li>
+</ul>
+
 <h2>Version 0.4.0 - 2009/01/12</h2>
 <ul>
   <li>Ajaxサポートとファイルダウンロードサポートを追加しました。</li>
