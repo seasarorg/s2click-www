@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <title>S2Click - Click Framework with Seasar2</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<h1>S2Clickの設定</h1>
+
+<div class="content">
+<p>
+  <strong>s2click.dicon</strong>でS2Clickの設定を行います。
+  <strong>org.seasar.s2click.S2ClickConfig</strong>のプロパティをセットすることで、
+  Clickの設定ファイルとほとんど同じ設定を行うことができます。
+  Clickの設定ファイルであるclick.xmlは作成する必要はありません（作成しても無視されます）。
+</p>
+<pre class="code">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  &lt;component class="org.seasar.s2click.S2ClickConfig"&gt;
+    &lt;property name="formatClass"&gt;
+      @org.seasar.s2click.example.util.S2ClickFormat@class
+    &lt;/property&gt;
+  &lt;/component&gt;
+&lt;/components&gt; </pre>
+
+<p>
+  <code>S2ClickConfig</code>には以下のプロパティを設定可能です。
+</p>
+
+<dl>
+  <dt>charset</dt>
+  <dd>文字コードを指定します。デフォルトはUTF-8です。
+  <pre class="code">
+&lt;property name="charset"&gt;
+  "Windows-31J"
+&lt;/property&gt;</pre>
+  </dd>
+
+  <dt>formatClass</dt>
+  <dd>Velocityテンプレートで使用可能なFormatオブジェクトを指定します。省略した場合は<code>org.seasar.s2click.util.S2ClickFormat</code>が用いられます。
+  <pre class="code">
+&lt;property name="formatClass"&gt;
+  @example.util.S2ClickFormat@class
+&lt;/property&gt;</pre>
+  </dd>
+  
+  <dt>mode</dt>
+  <dd>Clickの動作モード。production、profile、development、debug、traceのいずれかを指定します。デフォルトはdevelopmentです。
+    モードによってClickの動作（HTMLテンプレートのリロードを行うかどうか等）やログに出力される内容が変化します。
+    詳細については<a href="http://click.sourceforge.net/docs/configuration.html#application-configuration">Clickのドキュメント</a>を参照してください。
+  <pre class="code">
+&lt;property name="mode"&gt;
+  "development"
+&lt;/property&gt;</pre>
+  </dd>
+
+  <dt>headers</dt>
+  <dd>共通ヘッダ。</dd>
+
+  <dt>locale</dt>
+  <dd>ロケール。</dd>
+
+  <dt>logService</dt>
+  <dd>ログ出力を行うサービスクラスを指定します。省略した場合は<code>org.apache.click.service.ConsoleLogService</code>が用いられます。
+  <pre class="code">
+&lt;property name="logService"&gt;
+  @sample.service.SampleLogService@class
+&lt;/property&gt;
+&lt;!-- プロパティを指定する場合 --&gt;
+&lt;initMethod name="addLogServiceProperty"&gt;
+  &lt;arg&gt;"プロパティ名"&lt;/arg&gt;
+  &lt;arg&gt;"プロパティ値"&lt;/arg&gt;
+&lt;/initMethod&gt;
+</pre>
+  </dd>
+  
+  <dt>templateService</dt>
+  <dd>テンプレート処理を行うサービスクラスを指定します。省略した場合は<code>org.apache.click.service.VelocityTemplateService</code>が用いられます。
+  <pre class="code">
+&lt;property name="templateService"&gt;
+  @sample.service.SampleTemplateService@class
+&lt;/property&gt;
+&lt;!-- プロパティを指定する場合 --&gt;
+&lt;initMethod name="addTemplateServiceProperty"&gt;
+  &lt;arg&gt;"プロパティ名"&lt;/arg&gt;
+  &lt;arg&gt;"プロパティ値"&lt;/arg&gt;
+&lt;/initMethod&gt;
+</pre>
+  </dd>
+</dl>
+
+<p>
+  S2Clickではページの自動マッピングは常に有効です。
+  また、ページクラスを配置するパッケージはSeasar2の規約に従って<strong>convension.dicon</strong>の設定を使用します。
+</p>
+<pre class="code">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd"&gt;
+&lt;components&gt;
+  &lt;component class="org.seasar.framework.convention.impl.NamingConventionImpl"&gt;
+    &lt;initMethod name="addRootPackageName"&gt;
+      &lt;arg&gt;"org.seasar.s2click.example"&lt;/arg&gt;
+    &lt;/initMethod&gt;
+  &lt;/component&gt;
+&lt;/components&gt; </pre>
+
+<p>
+  この場合、ルートパッケージに.pageをつけたorg.seasar.s2click.example.pageパッケージにXxxxPageというクラス名（末尾がPageで終わるようにする）
+  でページクラスを作成しておくと、自動的にS2Containerに登録されます。
+</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <title>S2Click - Click Framework with Seasar2</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<h1>更新履歴</h1>
+
+<div class="content">
+<h2>Version 1.0.0 - 2009/04/26</h2>
+<ul>
+  <li>Apache Click 2.0.1ベースに移行。</li>
+  <li>ライセンス的に問題のあるJavaScriptライブラリを除去。</li>
+  <li>ドキュメントの整備＆増強。</li>
+  <li>テスト用のスーパークラスを提供。</li>
+</ul>
+
+<h2>Version 0.5.0 - 2009/02/25</h2>
+<ul>
+  <li><code>@Path</code>アノテーションを使ったページクラスがあるとproductionモード、profileモードで動作しないバグを修正しました。</li>
+  <li><code>ClickApp</code>をpublicクラスに変更し、<code>S2ClickUtils#getClickApp()</code>で<code>ClickApp</code>を取得できるようにしました。</li>
+  <li><code>@Request</code>によるリクエストパラメータのバインド処理を<code>S2ClickServlet</code>ではなく<code>S2ClickPage#onInit()</code>で行うようにしました。</li>
+  <li>クラスパス内のリソースを参照するための<code>ResourceServlet</code>を追加しました。</li>
+  <li><code>MobileForm</code>コントロールを追加しました。</li>
+  <li><code>PaginateList</code>コントロールを追加しました。</li>
+  <li>同梱のS2Containerを2.4.34にバージョンアップしました。</li>
+  <li><code>S2ClickEncodingFilter</code>を追加しました。</li>
+</ul>
+
+<h2>Version 0.4.0 - 2009/01/12</h2>
+<ul>
+  <li>Ajaxサポートとファイルダウンロードサポートを追加しました。</li>
+  <li><code>CodePrettify</code>コントロールを追加しました。</li>
+  <li><code>S2ClickFormat</code>に<code>ognl()</code>メソッドと<code>mask()</code>メソッドを追加しました。</li>
+  <li><code>ToolTip</code>コントロールで使用するJavaScriptライブラリをjTipからoverLIBに変更しました。</li>
+  <li><code>ConfirmSubmit</code>コントロールを削除し、<code>S2ClickForm</code>の<code>addConfirmMessage()</code>で確認メッセージを設定できるようにしました。</li>
+  <li><code>S2ClickForm</code>で制御用のhiddenフィールドをフォームの一番最後に出力するようにしました。</li>
+  <li><code>FCKEditor</code>コントロールを追加しました。</li>
+  <li><code>S2ClickFormat</code>に<code>date()</code>メソッドと<code>datetime()</code>メソッドを追加しました。</li>
+  <li><code>@Request</code>アノテーションに<code>required()</code>パラメータを追加しました。</li>
+  <li><a href="http://orangoo.com/labs/GreyBox/">GreyBox</a>を使用したモーダルダイアログを実現するためのコントロール群を追加しました。</li>
+  <li><code>@UrlPattern</code>アノテーションでURLパターン機能を利用できるようにしました。</li>
+  <li><code>HiddenList</code>コントロールを追加しました。</li>
+  <li>フォームのフィールドをhiddenに変換するための<code>S2ClickUtils#convertToHidden()</code>、<code>S2ClickForm#toHidden()</code>を追加しました。</li>
+</ul>
+0.4.0での変更点は<a href="https://www.seasar.org/issues/browse/CLICK/fixforversion/10771">こちら</a>も参照してください。
+
+<h2>Version 0.3.0 - 2008/08/07</h2>
+<ul>
+  <li>0.2.0から全面的に書き直し、HOT deploy対応等を実現しました。</li>
+</ul>
+<p>
+  このリリースはHOT deploy対応等が一区切りついたという段階のお試しリリース的な位置付けになります。
+  1.0.0のリリースまでは大きな変更が入る可能性がありますのでご利用には充分ご注意ください。
+</p>
+</div>
+
+</body>
+</html>

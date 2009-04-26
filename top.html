@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <title>S2Click - Click Framework with Seasar2</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<h1>S2Click - Click Framework with Seasar2</h1>
+
+<div class="content">
+<h2>S2Clickとは?</h2>
+<p>
+  S2Clickとは、Seasar2とClick Frameworkを組み合わせて利用するためのアダプタです。
+  以下のような機能を提供します。
+</p>
+<ul>
+  <li>ClickのページクラスをS2Containerで管理することができます</li>
+  <li>ClickのページクラスのHOT deployに対応します</li>
+  <li>Seasar2が推奨するpublicフィールドをClickで扱いやすくするための機能を提供します</li>
+  <li>Clickの設定をSeasar2のdiconファイルに集約します</li>
+  <li>Java 5のアノテーションを活用した機能を提供します</li>
+  <li>Ajax、ファイルダウンロードをサポートする機能を提供します</li>
+  <li>Click標準では提供されていない便利なコントロールやユーティリティを提供します</li>
+  <li>携帯向けのWebアプリケーションを開発するために便利な機能を提供します</li>
+  <li>ClickIDEのS2Click向け拡張プラグインを提供します</li>
+</ul>
+<p>
+  なお、S2Clickの動作にはJava 5以降が必須です。
+</p>
+
+<h2>ダウンロード</h2>
+<ul>
+  <li><a href="releases/s2click-1.0.0.zip">S2Click 1.0.0</a></li>
+  <li><a href="releases/s2click-0.5.0.zip">S2Click 0.5.0</a></li>
+  <li><a href="releases/s2click-0.4.0.zip">S2Click 0.4.0</a></li>
+  <li><a href="releases/s2click-0.3.0.zip">S2Click 0.3.0</a></li>
+</ul>
+<p>
+  各バージョンごとの更新履歴は<a href="history.html">こちら</a>を参照してください。
+  また、S2Clickに同梱されているライブラリについては<a href="libraries.html">こちら</a>を参照してください。
+</p>
+<p>
+  S2ClickではClickプロジェクトにて開発されているClick Framework向けのEclipseプラグイン「ClickIDE」に
+  以下のプラグインを追加インストールすることで、S2ClickのプロジェクトでもClickIDEの機能を利用できるようになります。
+  ClickIDEをインストール後、以下のリンクからダウンロードしたJARファイルをEclipseのpluginsフォルダにコピーしてください。
+</p>
+<ul>
+  <li>
+    <a href="releases/org.seasar.s2click.clickide.extension_1.0.0.jar">org.seasar.s2click.clickide.extension_1.0.0.jar</a>
+    （要<a href="http://sourceforge.net/project/showfiles.php?group_id=82095&package_id=181305&release_id=639119">ClickIDE 2.1.0</a>）
+  </li>
+</ul>
+
+<h2>サンプルを動かしてみる</h2>
+<p>
+  リリースアーカイブを展開すると<strong>s2click-example.war</strong>というwarファイルがあります。
+  これはS2Clickのサンプルアプリケーションです。
+  Tomcatなどにデプロイし、Webブラウザから<tt>http://localhost:8080/s2click-example</tt>にアクセスすると動作を確認することができます。
+</p>
+
+<h2>スタートアップ</h2>
+
+<p>
+  リリースアーカイブには以下のzipファイルが含まれています。これらはS2Clickによる開発をはじめるためのブランクプロジェクトです。
+  そのままEclipseにインポートしてご利用ください。
+</p>
+<ul>
+  <li><strong>s2click-blank.zip</strong> （S2Clickのみ）</li>
+  <li><strong>s2click-s2jdbc-blank.zip</strong> （S2Click + S2JDBC）</li>
+</ul>
+<p>
+  なお、ブランクプロジェクトは以下の環境が前提となっています。
+</p>
+<ul>
+  <li>Eclipse 3.3以上</li>
+  <li>WTP 2.0以上</li>
+  <li>Java 5.0以上</li>
+  <li>Apache Tomcat 6.0がServersビューに登録されていること</li>
+</ul>
+<p>
+  プロジェクトをインポートしたらWebContent/index.htmを右クリックし、
+  コンテキストメニューから[Run As] &gt; [Run on Server]を選択してください。
+  Tomcatが起動し、足し算アプリが表示されるはずです。
+</p>
+<p>
+  なお、S2ClickのHOT deploy機能を利用する場合、Tomcat側でコンテキストのリロードが実行されないようにしておくと便利です。
+  WTPでは以下の手順でコンテキストのリロードを無効にすることができます。
+</p>
+<ol>
+  <li>Serversビューで登録されているTomcatをダブルクリックする</li>
+  <li>Tomcatの設定を行うためのエディタが表示されるので、[Modules]タブを選択する</li>
+  <li>S2Clickのプロジェクトを選択して[Edit]ボタンをクリック</li>
+  <li>[Auto reloading enabled]のチェックボックスのチェックを外す</li>
+</ol>
+<img src="tomcat.png" alt="Tomcatの設定変更" style="border: 1px solid gray;"/>
+</div>
+
+</body>
+</html>
