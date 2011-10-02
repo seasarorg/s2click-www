@@ -1,23 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <!--
-   Licensed to the Apache Software Foundation (ASF) under one
-   or more contributor license agreements.  See the NOTICE file
-   distributed with this work for additional information
-   regarding copyright ownership.  The ASF licenses this file
-   to you under the Apache License, Version 2.0 (the
-   "License"); you may not use this file except in compliance
-   with the License.  You may obtain a copy of the License at
+ Copyright 2006-2011 the Seasar Foundation and the Others.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
 
      http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing,
-   software distributed under the License is distributed on an
-   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-   KIND, either express or implied.  See the License for the
-   specific language governing permissions and limitations
-   under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ either express or implied. See the License for the specific language
+ governing permissions and limitations under the License.
 -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
 <head>
   <title>S2Click - Apache Click with Seasar2</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -70,6 +67,35 @@ addControl(link);
 AjaxSubmit submit = new AjaxSubmit("submit", this, "onClick");
 submit.addAjaxHandler(AjaxUtils.ON_COMPLETE, "displayResult");
 form.add(submit);
+</pre>
+
+<h3>@AjaxHandlerアノテーション</h3>
+<p>
+  Ajaxコントロールをフォームクラスのpublicフィールドとして定義する場合、
+  <code>addAjaxHandler()</code>メソッドでの設定を
+  <a href="javadoc/org/seasar/s2click/annotation/AjaxHandler.html">@AjaxHandler</a>アノテーションで行うことができます。
+</p>
+<pre class="code">
+public class JsonForm extends S2ClickForm {
+
+  private static final long serialVersionUID = 1L;
+
+  public TextField keyword = new TextField("keyword", "書籍名");
+
+  @AjaxHandler(onCreate="startProgress", onComplete="displayResult")
+  public AjaxSubmit search = new AjaxSubmit("submit", "検索");
+
+  @AjaxHandler(onCreate="startProgress", onComplete="displayResult")
+  public AjaxButton searchAll = new AjaxButton("searchAll", "全件検索");
+
+  @Attributes({@Attribute(name="onclick", value="clearResult()")})
+  public Button clear = new Button("clear", "クリア");
+
+  public JsonForm(String name){
+    super(name);
+    setFieldAutoRegisteration(true);
+  }
+}
 </pre>
 
 <h2>ページクラスのメソッドをAjaxで呼び出す</h2>
